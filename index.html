@@ -15,6 +15,7 @@
                 <div class="card mt-5">
                     <div class="card-header">
                         <h2 class="card-title">Stimme jetzt ab!</h2>
+                        <span class="float-end">{{ totalVotes }}</span>
                     </div>
                     <div class="card-body">
                         <div class="d-flex">
@@ -23,7 +24,7 @@
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <h5>{{ submissions[0].title }}
-                                    <span class="float-end text-primary" style="cursor: pointer" v-on:click="upvote('Stimme abgegeben', $event)">
+                                    <span class="float-end text-primary" style="cursor: pointer" v-on:click="upvote(), logUpvote('upgevotet')">
                                         <i class="fa fa-chevron-up"></i><strong> {{ submissions[0].votes }} </strong></span>
                                 </h5>
                             <div v-html="submissions[0].desc"></div>

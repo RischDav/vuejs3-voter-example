@@ -1,14 +1,32 @@
 const app = Vue.createApp({
     data: function() {
         return {
-            submissions: submissions // aus seed.js
+            submissions: submissions, // aus seed.js
+            totalVotes: 0
         };
     },
+    computed: {
+
+    },
     methods: {
-        upvote(text) {
+        upvote() {
             this.submissions[0].votes++;
-            console.log(text);
         },
+        logUpvote(text){
+            console.log(text)
+        }
+    },
+    watch : {
+        submissions: {
+            handler(newValue, oldValue) {
+                console.log("Watch property ausgeführt")
+                this.totalVotes = this.submissions.reduce((totalVotes, submission) => {
+                    return totalVotes + submission.votes;
+                }, 0)
+            },
+            deep: true,
+            immediate: true,
+        }
     }
 
 })
