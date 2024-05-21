@@ -12,10 +12,10 @@ const app = Vue.createApp({
       });
     },
     cardHeaderBackgroundColor() {
-      if (this.totalVotes >= 50) {
+      if (this.totalVotes >= 0) {
         return ["bg-primary", "text-white"];
       } else {
-        return ["bg-success"];
+        return ["bg-danger", "text-white"];
       }
     },
   },
@@ -39,27 +39,50 @@ app.component("SubmissionListItem", {
     upvote() {
       this.submission.votes++;
     },
+    downvote() {
+        this.submission.votes--;
+      },
     logUpvote(text) {
       console.log(text);
     },
+  },
+  computed: {
+    votesColor() {
+        if (this.submission.votes < 0) {
+            return ["text-danger"]
+        } else {
+            return ["text-primary"]
+        }
+    },
+    arrowDirection() {
+        if(this.submission.votes < 0){
+            return ["fa fa-chevron-down"]
+        } else {
+            return ["fa fa-chevron-up"]
+        }
+    }
   },
   props: ["submission"],
   template: `
     <div class="d-flex">
         <div class="d-shrink-0">
-            <img v-bind:src="submission.img" alt="" />
+            <img :src="submission.img" alt="" />
         </div>
         <div class="flex-grow-1 ms-3">
             <h5>
             {{ submission.title }}
             <span
-                class="float-end text-primary"
-                style="cursor: pointer"
-                v-on:click="upvote(), logUpvote('upgevotet')"
+                :class="votesColor" class="float-end"
             >
-                <i class="fa fa-chevron-up"></i
-                ><strong> {{ submission.votes }} </strong></span
-            >
+                <i :class="arrowDirection"></i
+                ><strong> {{ submission.votes }} </strong>
+                </span>
+                <br>
+                <span class="float-end d-grid gap-2 mx-auto" style="margin-top: 20px;"> 
+                <button type="button" class="btn btn-success float-end" @click="upvote()">Upvote</button>
+                <br>
+                <button type="button" class="btn btn-danger float-end" @click="downvote()">Downvote</button>
+                </span>
             </h5>
             <div v-html="submission.desc"></div>
             <small class="text-muted"

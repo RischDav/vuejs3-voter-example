@@ -21,16 +21,16 @@
         <div class="row">
           <div class="col-xl-4 offset-xl-4">
             <div class="card mt-5">
-              <div class="card-header" v-bind:class="cardHeaderBackgroundColor">
+              <div class="card-header" :class="cardHeaderBackgroundColor">
                 <h2 class="card-title">Stimme jetzt ab!</h2>
                 <span class="float-end">{{ totalVotes }}</span>
               </div>
               <div class="card-body">
                 <template
                   v-for="(submission, index) in sortedSubmissions"
-                  v-bind:key="submission.id"
+                  :key="submission.id"
                 >
-                  <submission-list-item v-bind:submission="submission"></submission-list-item>
+                  <submission-list-item :submission="submission"></submission-list-item>
                   <hr />
                 </template>
               </div>
