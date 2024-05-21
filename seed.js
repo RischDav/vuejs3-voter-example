@@ -19,7 +19,7 @@ const submissions = [
         id: 3 ,
         title: 'Peking-Ente',
         desc: 'Das kaiserliche Gericht.',
-        votes: 20,
+        votes: 0,
         author: 'China',
         img: 'https://placehold.co/60x60'
     },
